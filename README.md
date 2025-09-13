@@ -1,16 +1,23 @@
-# string_calculator_tdd
+# String Calculator (TDD kata)
 
-A new Flutter project.
+Simple implementation of the String Calculator kata in Flutter.
 
-## Getting Started
+Run tests:
+```bash
+flutter pub get
+flutter test
+```
 
-This project is a starting point for a Flutter application.
+# Features
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Return 0 when input is empty String
+- Handle single number input
+- Add support for two numbers separated by comma
+- Add support for multiple comma separated numbers
+- Support new line as a valid Delimiter
+- Support custom delimiter syntax //;\n
+- Throws exception when negative numbers are present
+- Ignore numbers greater than 1000
+- Support multi-character delimiter
+- Support multiple delimiters
+- Support multiple multi-character delimiters
