@@ -6,7 +6,7 @@ void main() {
 
 int stAdd(String numbers) {
   if (numbers.isEmpty) return 0;
-  return int.parse(numbers);
+  return numbers.split(",").map(int.parse).reduce((a, b) => a + b);
 }
 
 class MainApp extends StatelessWidget {
