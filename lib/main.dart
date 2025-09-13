@@ -10,18 +10,21 @@ int stAdd(String numbers) {
   String nums = numbers;
 
   if (numbers.startsWith("//")) {
-    // assuming single character delimiter
-    if (nums.length < 4 || nums[3] != "\n") {
-      throw ArgumentError('Invalid custom delimiter syntax');
-    }
-    var delimiter = numbers[2];
-    delimiterPattern = "[$delimiter]";
+    var delimiterSection = numbers.split('\n')[0].substring(2);
     nums = numbers.split('\n')[1];
+    // if delimiter wraps with brackets, support multi-character
+    if (delimiterSection.startsWith('[') && delimiterSection.endsWith(']')) {
+      final delimiter =
+          delimiterSection.substring(1, delimiterSection.length - 1);
+      delimiterPattern = RegExp.escape(delimiter);
+    } else {
+      delimiterPattern = "[$delimiterSection]";
+    }
   }
 
-  var integerParts =
+  final integerParts =
       nums.split(RegExp(delimiterPattern)).map(int.parse).toList();
-  var negativeParts = integerParts.where((n) => n < 0).toList();
+  final negativeParts = integerParts.where((n) => n < 0).toList();
   if (negativeParts.isNotEmpty) {
     throw Exception(
         "negative numbers are not allowed ${negativeParts.join(",")}");

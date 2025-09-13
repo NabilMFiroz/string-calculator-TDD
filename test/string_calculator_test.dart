@@ -53,4 +53,9 @@ void main() {
     expect(stAdd("7,1004"), 7);
     expect(stAdd("3,1000"), 1003); // 1000 is allowed
   });
+
+  // multiple characters for delimiter
+  test("support multicharacter delimiter", () {
+    expect(stAdd("//[***]\n1***3***3"), 7);
+  });
 }
