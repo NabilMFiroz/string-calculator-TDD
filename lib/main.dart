@@ -6,8 +6,20 @@ void main() {
 
 int stAdd(String numbers) {
   if (numbers.isEmpty) return 0;
-  var delimiter = RegExp(r'[,\n]');
-  var parts = numbers.split(delimiter);
+  var delimiterPattern = "[,\n]"; // default delimiters
+  String nums = numbers;
+
+  if (numbers.startsWith("//")) {
+    // assuming single character delimiter
+    if (nums.length < 4 || nums[3] != "\n") {
+      throw ArgumentError('Invalid custom delimiter syntax');
+    }
+    var delimiter = numbers[2];
+    delimiterPattern = "[$delimiter]";
+    nums = numbers.split('\n')[1];
+  }
+
+  var parts = nums.split(RegExp(delimiterPattern));
   return parts.map(int.parse).reduce((a, b) => a + b);
 }
 

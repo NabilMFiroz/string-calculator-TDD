@@ -28,4 +28,9 @@ void main() {
       () {
     expect(stAdd("7,3,4\n2,3"), 19);
   });
+
+  // Custom Delimiter defined at start test - return sum
+  test("Support Custom Delimiter defined at start - sum of numbers", () {
+    expect(stAdd("//;\n4;3"), 7);
+  });
 }
