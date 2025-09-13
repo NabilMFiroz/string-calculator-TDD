@@ -16,4 +16,9 @@ void main() {
   test("Two numbers separated by comma return - sum of numbers", () {
     expect(stAdd("7,3"), 10);
   });
+
+  // Multiple Numbers test - return sum
+  test("Multiple Numbers separated by comma return - sum of numbers", () {
+    expect(stAdd("7,3,4,2,3"), 19);
+  });
 }
