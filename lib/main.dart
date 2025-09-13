@@ -19,8 +19,15 @@ int stAdd(String numbers) {
     nums = numbers.split('\n')[1];
   }
 
-  var parts = nums.split(RegExp(delimiterPattern));
-  return parts.map(int.parse).reduce((a, b) => a + b);
+  var integerParts =
+      nums.split(RegExp(delimiterPattern)).map(int.parse).toList();
+  var negativeParts = integerParts.where((n) => n < 0).toList();
+  if (negativeParts.isNotEmpty) {
+    throw Exception(
+        "negative numbers are not allowed ${negativeParts.join(",")}");
+  }
+
+  return integerParts.reduce((a, b) => a + b);
 }
 
 class MainApp extends StatelessWidget {

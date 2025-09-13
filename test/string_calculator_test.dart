@@ -33,4 +33,18 @@ void main() {
   test("Support Custom Delimiter defined at start - sum of numbers", () {
     expect(stAdd("//;\n4;3"), 7);
   });
+
+  // if negative numbers exist - throw exception
+  test("throws exception when negatives are present", () {
+    expect(
+      () => stAdd("5,-7,3,-4"),
+      throwsA(
+        predicate(
+          (e) =>
+              e is Exception &&
+              e.toString().contains("negative numbers are not allowed -7,-4"),
+        ),
+      ),
+    );
+  });
 }
