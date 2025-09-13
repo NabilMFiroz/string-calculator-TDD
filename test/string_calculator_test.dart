@@ -21,4 +21,11 @@ void main() {
   test("Multiple Numbers separated by comma return - sum of numbers", () {
     expect(stAdd("7,3,4,2,3"), 19);
   });
+
+  // Handle new line as Delimiter along with comma Numbers test - return sum
+  test(
+      "Multiple Numbers separated by comma and new line return - sum of numbers",
+      () {
+    expect(stAdd("7,3,4\n2,3"), 19);
+  });
 }

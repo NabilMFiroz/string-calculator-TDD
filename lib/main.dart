@@ -6,7 +6,9 @@ void main() {
 
 int stAdd(String numbers) {
   if (numbers.isEmpty) return 0;
-  return numbers.split(",").map(int.parse).reduce((a, b) => a + b);
+  var delimiter = RegExp(r'[,\n]');
+  var parts = numbers.split(delimiter);
+  return parts.map(int.parse).reduce((a, b) => a + b);
 }
 
 class MainApp extends StatelessWidget {
