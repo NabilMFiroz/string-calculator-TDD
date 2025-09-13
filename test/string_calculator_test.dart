@@ -58,4 +58,9 @@ void main() {
   test("support multicharacter delimiter", () {
     expect(stAdd("//[***]\n1***3***3"), 7);
   });
+
+  // multiple delimiter
+  test("support multiple delimiter", () {
+    expect(stAdd("//[*][%]\n1*3%4"), 8);
+  });
 }

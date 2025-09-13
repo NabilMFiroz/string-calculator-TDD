@@ -6,25 +6,31 @@ void main() {
 
 int stAdd(String numbers) {
   if (numbers.isEmpty) return 0;
-  var delimiterPattern = "[,\n]"; // default delimiters
+  RegExp delimiterRegex = RegExp('[,\n]'); // default delimiters
   String nums = numbers;
 
   if (numbers.startsWith("//")) {
     var delimiterSection = numbers.split('\n')[0].substring(2);
     nums = numbers.split('\n')[1];
-    // if delimiter wraps with brackets, support multi-character
-    if (delimiterSection.startsWith('[') && delimiterSection.endsWith(']')) {
-      final delimiter =
-          delimiterSection.substring(1, delimiterSection.length - 1);
-      delimiterPattern = RegExp.escape(delimiter);
+    // multiple delimiters inside []
+    final delimitersMatches = RegExp(r'\[(.*?)\]').allMatches(delimiterSection);
+    if (delimitersMatches.isNotEmpty) {
+      final delimiters =
+          delimitersMatches.map((m) => RegExp.escape(m.group(1)!)).toList();
+      delimiterRegex = RegExp(delimiters.join('|'));
     } else {
-      delimiterPattern = "[$delimiterSection]";
+      // Single character Delimiter
+      delimiterRegex = RegExp(RegExp.escape(delimiterSection));
     }
   }
 
-  final integerParts =
-      nums.split(RegExp(delimiterPattern)).map(int.parse).toList();
+  final integerParts = nums
+      .split(delimiterRegex)
+      .where((s) => s.isNotEmpty)
+      .map(int.parse)
+      .toList();
   final negativeParts = integerParts.where((n) => n < 0).toList();
+
   if (negativeParts.isNotEmpty) {
     throw Exception(
         "negative numbers are not allowed ${negativeParts.join(",")}");
