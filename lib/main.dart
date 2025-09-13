@@ -4,6 +4,11 @@ void main() {
   runApp(const MainApp());
 }
 
+int stAdd(String numbers) {
+  if (numbers.isEmpty) return 0;
+  return int.parse(numbers);
+}
+
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
 
