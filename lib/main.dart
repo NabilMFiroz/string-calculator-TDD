@@ -27,7 +27,7 @@ int stAdd(String numbers) {
         "negative numbers are not allowed ${negativeParts.join(",")}");
   }
 
-  return integerParts.reduce((a, b) => a + b);
+  return integerParts.where((n) => n <= 1000).fold(0, (a, b) => a + b);
 }
 
 class MainApp extends StatelessWidget {

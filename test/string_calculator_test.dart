@@ -47,4 +47,10 @@ void main() {
       ),
     );
   });
+
+  // Numbers greater than 1000 are ignored
+  test("ignore numbers greater than 1000", () {
+    expect(stAdd("7,1004"), 7);
+    expect(stAdd("3,1000"), 1003); // 1000 is allowed
+  });
 }
